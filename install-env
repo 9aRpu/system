@@ -1,0 +1,10 @@
+#!/bin/bash
+####################################################################
+# Author:       9aRpu
+# Version:      1.0.0
+# Description:  Installs dwm and tools to end up with a basic env
+####################################################################
+
+### Install dependencies ###
+yes | pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot git
+
