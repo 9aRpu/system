@@ -3,8 +3,30 @@
 # Author:       9aRpu
 # Version:      1.0.0
 # Description:  Installs dwm and tools to end up with a basic env
+# Sources:      https://www.chrisatmachine.com/Linux/07-dwm/
 ####################################################################
 
 ### Install dependencies ###
-yes | pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot git
+yes | pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot git lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
 
+### Create configuration directories ###
+mkdir ~/.config
+mkdir /usr/share/xsessions
+
+### Clone source to config directory ###
+git clone git://git.suckless.org/dwm ~/.config/dwm
+git clone git://git.suckless.org/st ~/.config/st
+git clone git://git.suckless.org/dmenu ~/.config/dmenu
+
+### Enable light display manager ###
+systemctl enable lightdm
+
+cat << EOF > /usr/share/xsessions/dwm.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Name=Dwm
+Comment=the dynamic window manager
+Exec=dwm
+Icon=dwm
+Type=XSession
+EOF
